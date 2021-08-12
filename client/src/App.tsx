@@ -1,5 +1,6 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import "./App.css";
+import Users from "./components/Users";
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_URI,
@@ -9,7 +10,9 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div>Twitter</div>
+      <div>
+        <Users />
+      </div>
     </ApolloProvider>
   );
 }
