@@ -1,6 +1,7 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import "./App.css";
 import Users from "./components/Users";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_URI,
@@ -10,9 +11,13 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div>
-        <Users />
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Users />
+          </Route>
+        </Switch>
+      </Router>
     </ApolloProvider>
   );
 }
