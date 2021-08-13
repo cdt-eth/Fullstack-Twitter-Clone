@@ -10,6 +10,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "apollo-link-context";
 import Signup from "./pages/Signup";
+import Login from "./pages/Login";
 
 const httpLink = new HttpLink({ uri: process.env.REACT_APP_URI });
 const authLink = setContext(async (req, { headers }) => {
@@ -34,14 +35,17 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Switch>
-          <Route exact path="/">
-            <Users />
-          </Route>
           <Route path="/landing">
             <Landing />
           </Route>
           <Route path="/signup">
             <Signup />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/">
+            <Users />
           </Route>
         </Switch>
       </Router>
