@@ -9,6 +9,7 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import { setContext } from "apollo-link-context";
+import Signup from "./pages/Signup";
 
 const httpLink = new HttpLink({ uri: process.env.REACT_APP_URI });
 const authLink = setContext(async (req, { headers }) => {
@@ -38,6 +39,9 @@ function App() {
           </Route>
           <Route path="/landing">
             <Landing />
+          </Route>
+          <Route path="/signup">
+            <Signup />
           </Route>
         </Switch>
       </Router>
