@@ -1,7 +1,8 @@
 import { gql, useMutation } from "@apollo/client";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import TwitterLogo from "../styles/assets/twitter-logo.png";
 
 const SIGNUP_MUTATION = gql`
   mutation signup($name: String, $email: String!, $password: String!) {
@@ -33,13 +34,16 @@ const Signup = () => {
     email: Yup.string()
       .email("Invalid email address")
       .required("Email Required"),
+
     password: Yup.string()
       .max(20, "Must be 20 characters or less")
       .required("Password Required"),
+
     confirmPassword: Yup.string().oneOf(
       [Yup.ref("password")],
       "Passwords must match"
     ),
+
     name: Yup.string()
       .max(15, "Must be 15 characters or less")
       .required("Name Required"),
@@ -47,15 +51,25 @@ const Signup = () => {
 
   return (
     <div>
-      <h1>Signup</h1>
+      <img
+        src={TwitterLogo}
+        alt="logo"
+        style={{ width: "50px" }}
+        className="logo"
+      />
+
+      <h3>Sign up</h3>
+
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
           setSubmitting(true);
+
           const response = await signup({
             variables: values,
           });
+
           localStorage.setItem("token", response.data.signup.token);
           setSubmitting(false);
           history.push("/users");
@@ -78,9 +92,16 @@ const Signup = () => {
           />
           <ErrorMessage name="confirmPassword" component={"div"} />
 
-          <button type="submit">Signup</button>
+          <button type="submit" className="login-button">
+            <span>Signup</span>
+          </button>
         </Form>
       </Formik>
+
+      <div className="register">
+        <h4>Already have an account?</h4>
+        <Link to="/login">Log in</Link>
+      </div>
     </div>
   );
 };
