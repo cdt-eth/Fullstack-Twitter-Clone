@@ -50,7 +50,7 @@ const Signup = () => {
   });
 
   return (
-    <div>
+    <div className="container">
       <img
         src={TwitterLogo}
         alt="logo"
