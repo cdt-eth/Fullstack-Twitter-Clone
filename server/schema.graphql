@@ -21,6 +21,15 @@ type Mutation {
   togglePublishPost(id: Int!): Post
 }
 
+"""
+
+    This scalar should never make it into production. It is used as a placeholder for situations
+    where GraphQL Nexus encounters a missing type. We don't want to error immediately, otherwise
+    the TypeScript definitions will not be updated.
+  
+"""
+scalar NEXUS__UNKNOWN__TYPE
+
 type Post {
   author: User
   content: String
@@ -59,7 +68,7 @@ type User {
   email: String!
   id: Int!
   name: String
-  posts: [Post!]!
+  tweets: [NEXUS__UNKNOWN__TYPE!]!
 }
 
 input UserCreateInput {
